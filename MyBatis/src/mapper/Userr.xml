@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.IUserrDAO">
+	<resultMap type="pojo.Userr" id="listuUserr">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="my_time" property="my_time"/>
+		
+		<!-- 		一对多的配置   fetchType="lazy":延迟加载 -->
+		<collection fetchType="lazy" property="articles" ofType="pojo.Article" column="id" select="DAO.IArticleDAO.getArticleByUserrid">
+		
+		
+		</collection>
+	</resultMap>
+	<select id="getUserrAndArticleById" parameterType="int" resultMap="listuUserr">
+		select * from userr where id = #{id}
+	</select>
+</mapper>
+
+
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DAO.IUserinfoDAO">
+	<select id="getAllUser" resultType="pojo.Userinfo">
+		select * from userinfo
+	</select>
+	<select id="getUserByid" resultType="pojo.Userinfo" parameterType="String">
+		select * from userinfo where id = #{id}
+	</select>
+	<insert id="addUser"  parameterType="pojo.Userinfo">
+		insert into userinfo values(seq_userinfo.nextval,#{name},#{sex},#{phone},#{pwd},#{create_time},#{last_time},#{type},#{status})
+	</insert>
+	<update id="updateUser" parameterType="pojo.Userinfo">
+		update userinfo set name=#{name},sex=#{sex},phone=#{phone},pwd=#{pwd},create_time=#{create_time},last_time=#{last_time},type=#{type},status=#{status} where id=#{id}
+	</update>
+	<delete id="deleteUserByid" parameterType="int">
+		delete from userinfo where id=#{id}
+	</delete>
+</mapper> 
+
+

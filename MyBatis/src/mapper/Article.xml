@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DAO.IArticleDAO">
+<!-- 	多对一的查询 -->
+	<resultMap type="pojo.Article" id="resultUserArticleList">
+		<id property="id" column="ar_id"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		
+		<association fetchType="lazy" property="userr" javaType="pojo.Userr">
+			<id property="id" column="id"/>
+			<result property="name" column="name"/>
+			<result property="my_time" column="my_time"/>
+		</association>			
+	</resultMap>
+	<select id="selectArticles" parameterType="int" resultMap="resultUserArticleList">
+		select * from userr a,article b where a.id=b.userrid and a.id=#{id}
+	</select>
+	
+<!-- 	一对多的配合 -->
+	<select id="getArticleByUserrid" parameterType="int" resultType="pojo.Article">
+		select * from article where userrid = #{id}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
